@@ -12,26 +12,27 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f9fafb; color: #1e293b; overflow-x: hidden; }
         .gradient-text { background: linear-gradient(135deg, #0f766e 0%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
         .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .hero-svg-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
         .floating { animation: floating 3s ease-in-out infinite; }
         @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .breathing { animation: breathing 2s ease-in-out infinite; }
+        @keyframes breathing { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .step-line { height: 0; width: 2px; background: #0f766e; position: absolute; left: 20px; top: 0; }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 glass-card py-4 px-8 flex justify-between items-center">
         <div class="text-2xl font-bold gradient-text">Winspire</div>
         <div class="hidden md:flex space-x-8 font-medium text-slate-600">
-            <a href="#" class="hover:text-primary transition">The Problem</a>
-            <a href="#" class="hover:text-primary transition">How it Works</a>
-            <a href="#" class="hover:text-primary transition">Features</a>
-            <a href="#" class="hover:text-primary transition">FAQ</a>
+            <a href="#problem" class="hover:text-teal-700 transition">The Problem</a>
+            <a href="#solution" class="hover:text-teal-700 transition">How it Works</a>
+            <a href="#features" class="hover:text-teal-700 transition">Features</a>
+            <a href="#faq" class="hover:text-teal-700 transition">FAQ</a>
         </div>
-        <button class="bg-teal-700 text-white px-6 py-2.5 rounded-full font-semibold hover:bg-teal-800 transition-all shadow-lg hover:shadow-teal-700/20">Get Started</button>
+        <button class="bg-[#0f766e] text-white px-6 py-2.5 rounded-full font-semibold hover:bg-teal-800 transition">Get Started</button>
     </nav>
 
-    <!-- Hero Section -->
     <section class="relative min-h-screen pt-32 pb-20 px-8 flex flex-col md:flex-row items-center max-w-7xl mx-auto gap-12">
         <div class="flex-1 space-y-8" id="hero-text">
             <h1 class="text-5xl md:text-7xl font-bold leading-tight text-slate-900">
@@ -41,100 +42,271 @@
                 Winspire is your interactive career compass that turns parental pressure and exam anxiety into a structured roadmap you can trust.
             </p>
             <div class="flex flex-wrap gap-4">
-                <button class="bg-teal-700 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-xl shadow-teal-700/20">Start Your Journey</button>
-                <button class="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all">Watch Demo</button>
+                <button class="bg-[#0f766e] text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition shadow-lg shadow-teal-700/20">Start Your Journey</button>
+                <button class="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-50 transition">Watch Demo</button>
             </div>
         </div>
-
-        <div class="flex-1 relative w-full h-[400px] md:h-[600px] flex items-center justify-center">
-            <svg viewBox="0 0 400 400" class="w-full h-full">
-                <path id="path" d="M50 350 C 100 250, 150 300, 200 200 C 250 100, 300 150, 350 50" fill="none" stroke="#0f766e" stroke-width="8" stroke-linecap="round" class="hero-path" />
-                <circle id="glow-ball" r="10" fill="#f59e0b" filter="drop-shadow(0 0 8px #f59e0b)" />
+        
+        <div class="flex-1 relative w-full flex justify-center items-center">
+            <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="hero-path" d="M50 350C50 350 100 250 200 200C300 150 350 50 350 50" stroke="#0f766e" stroke-width="4" stroke-linecap="round" class="hero-svg-path"/>
+                <circle id="hero-pulse" r="8" fill="#f59e0b">
+                    <animateMotion dur="3s" repeatCount="indefinite" path="M50 350C50 350 100 250 200 200C300 150 350 50 350 50" />
+                </circle>
             </svg>
-            <div class="absolute top-10 right-10 glass-card p-4 rounded-2xl shadow-xl floating">
-                <div class="text-sm font-bold text-teal-700">Next Step</div>
-                <div class="text-xs text-slate-500">Tech Career Path</div>
+            <div class="absolute top-10 right-10 floating bg-white p-4 rounded-2xl shadow-xl glass-card">
+                <span class="text-2xl">💻</span>
             </div>
-            <div class="absolute bottom-20 left-0 glass-card p-4 rounded-2xl shadow-xl floating" style="animation-delay: 1s">
-                <div class="text-sm font-bold text-amber-500">Milestone</div>
-                <div class="text-xs text-slate-500">Skill Validation</div>
+            <div class="absolute bottom-20 left-10 floating bg-white p-4 rounded-2xl shadow-xl glass-card" style="animation-delay: 1s">
+                <span class="text-2xl">🎨</span>
             </div>
         </div>
     </section>
 
-    <!-- Problem Section -->
-    <section class="py-20 bg-slate-50 px-8 overflow-hidden">
-        <div class="max-w-6xl mx-auto text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6">Career planning is <span class="text-red-500">broken</span></h2>
-            <p class="text-slate-600 text-lg">Scattered advice, exam stress, and zero direction.</p>
+    <section id="problem" class="py-24 bg-white px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-4">Career planning is <span class="gradient-text">broken</span></h2>
+            <div id="text-swap" class="text-xl text-center text-slate-500 mb-16 font-medium">Stable Jobs</div>
+            
+            <div class="grid md:grid-cols-3 gap-8" id="problem-cards">
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:scale-105 hover:rotate-2 hover:shadow-2xl transition duration-500 group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition">🤯</div>
+                    <h3 class="text-xl font-bold mb-2">Overwhelming Choices</h3>
+                    <p class="text-slate-600">Too many options, too little clarity on what actually fits you.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:scale-105 hover:-rotate-2 hover:shadow-2xl transition duration-500 group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition">😰</div>
+                    <h3 class="text-xl font-bold mb-2">Parental Pressure</h3>
+                    <p class="text-slate-600">Navigating high expectations without hurting relationships.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:scale-105 hover:rotate-1 hover:shadow-2xl transition duration-500 group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition">📉</div>
+                    <h3 class="text-xl font-bold mb-2">Outdated Advice</h3>
+                    <p class="text-slate-600">Using 1990s logic for a 2030s career market.</p>
+                </div>
+            </div>
         </div>
-        <div class="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto" id="problem-cards">
-            <div class="glass-card p-8 rounded-3xl w-full md:w-80 shadow-lg hover:translate-y-[-10px] transition-all">
-                <div class="text-3xl mb-4">🤯</div>
-                <h3 class="text-xl font-bold mb-2">Overwhelming Choices</h3>
-                <p class="text-slate-500 text-sm">Too many options, too little clarity on what actually fits you.</p>
+    </section>
+
+    <section id="solution" class="py-24 bg-slate-50 px-8">
+        <div class="max-w-4xl mx-auto relative">
+            <h2 class="text-3xl md:text-5xl font-bold mb-16">The Winspire <span class="gradient-text">Flow</span></h2>
+            <div class="step-line" id="progress-line"></div>
+            <div class="space-y-20 relative">
+                <div class="flex gap-12 items-start step-item opacity-0">
+                    <div class="w-10 h-10 rounded-full bg-[#0f766e] text-white flex items-center justify-center font-bold z-10 shrink-0">1</div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition">
+                        <h3 class="text-2xl font-bold mb-2">Discover Your Patterns</h3>
+                        <p class="text-slate-600">Short, gamified tests decode how you think, learn, and make decisions.</p>
+                    </div>
+                </div>
+                <div class="flex gap-12 items-start step-item opacity-0">
+                    <div class="w-10 h-10 rounded-full bg-[#0f766e] text-white flex items-center justify-center font-bold z-10 shrink-0">2</div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition">
+                        <h3 class="text-2xl font-bold mb-2">Match to Real Careers</h3>
+                        <p class="text-slate-600">We map your patterns to modern careers in tech, business, design, and more.</p>
+                    </div>
+                </div>
+                <div class="flex gap-12 items-start step-item opacity-0">
+                    <div class="w-10 h-10 rounded-full bg-[#0f766e] text-white flex items-center justify-center font-bold z-10 shrink-0">3</div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition">
+                        <h3 class="text-2xl font-bold mb-2">Get a Concrete Roadmap</h3>
+                        <p class="text-slate-600">Subjects, exams, skills, projects—everything laid out with milestones.</p>
+                    </div>
+                </div>
             </div>
-            <div class="glass-card p-8 rounded-3xl w-full md:w-80 shadow-lg hover:translate-y-[-10px] transition-all">
-                <div class="text-3xl mb-4">😰</div>
-                <h3 class="text-xl font-bold mb-2">Parental Pressure</h3>
-                <p class="text-slate-500 text-sm">Navigating high expectations without hurting relationships.</p>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white px-8">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">Try the <span class="gradient-text">Demo</span></h2>
+                <div class="bg-slate-900 rounded-3xl p-8 text-white space-y-8">
+                    <div class="space-y-4">
+                        <label class="block text-slate-400 font-medium">Interest Level</label>
+                        <input type="range" class="w-full accent-[#f59e0b]" id="demo-range">
+                        <div class="flex justify-between text-sm text-slate-500">
+                            <span>Low</span>
+                            <span id="range-val">50%</span>
+                            <span>High</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-[#0f766e] py-4 rounded-xl font-bold hover:scale-95 transition active:scale-90" id="demo-btn">Submit Choice</button>
+                </div>
             </div>
-            <div class="glass-card p-8 rounded-3xl w-full md:w-80 shadow-lg hover:translate-y-[-10px] transition-all">
-                <div class="text-3xl mb-4">📉</div>
-                <h3 class="text-xl font-bold mb-2">Outdated Advice</h3>
-                <p class="text-slate-500 text-sm">Using 1990s logic for a 2030s career market.</p>
+            <div class="relative h-[400px] flex items-center justify-center">
+                <div class="w-64 h-80 bg-white rounded-2xl shadow-2xl border flex flex-col items-center justify-center p-8 text-center cursor-pointer" id="swipe-card">
+                    <div class="text-5xl mb-6">🤔</div>
+                    <p class="font-medium text-slate-800">"I enjoy solving logical puzzles more than memorizing facts."</p>
+                    <div class="mt-8 flex gap-4 text-sm font-bold">
+                        <span class="text-red-500">← No</span>
+                        <span class="text-emerald-500">Yes →</span>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-24 bg-[#0f766e] text-white px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center">Built for <span class="text-amber-400">Trust</span></h2>
+            <div class="grid md:grid-cols-5 gap-4" id="pillar-cards">
+                <div class="p-6 rounded-2xl bg-white/10 backdrop-blur border border-white/20 hover:bg-white/20 transition cursor-default group">
+                    <div class="text-2xl mb-4 group-hover:scale-125 transition">🎓</div>
+                    <h3 class="font-bold mb-2">Expert-Built</h3>
+                    <p class="text-sm text-teal-100">Designed with top coaches.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/10 backdrop-blur border border-white/20 hover:bg-white/20 transition cursor-default group">
+                    <div class="text-2xl mb-4 group-hover:scale-125 transition">📊</div>
+                    <h3 class="font-bold mb-2">Data-Backed</h3>
+                    <p class="text-sm text-teal-100">Hundreds of student journeys.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/10 backdrop-blur border border-white/20 hover:bg-white/20 transition cursor-default group">
+                    <div class="text-2xl mb-4 group-hover:scale-125 transition">👨‍👩‍👧</div>
+                    <h3 class="font-bold mb-2">Parent-Friendly</h3>
+                    <p class="text-sm text-teal-100">Clear common language.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/10 backdrop-blur border border-white/20 hover:bg-white/20 transition cursor-default group">
+                    <div class="text-2xl mb-4 group-hover:scale-125 transition">🎯</div>
+                    <h3 class="font-bold mb-2">Actionable</h3>
+                    <p class="text-sm text-teal-100">No vague generic advice.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/10 backdrop-blur border border-white/20 hover:bg-white/20 transition cursor-default group">
+                    <div class="text-2xl mb-4 group-hover:scale-125 transition">🚀</div>
+                    <h3 class="font-bold mb-2">Future-Proof</h3>
+                    <p class="text-sm text-teal-100">2030s market insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 bg-white px-8">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center">Common <span class="gradient-text">Questions</span></h2>
+            <div class="space-y-4">
+                <div class="border border-slate-200 rounded-2xl overflow-hidden faq-item">
+                    <button class="w-full p-6 text-left flex justify-between items-center font-bold text-lg hover:bg-slate-50 transition">
+                        Who is Winspire for?
+                        <span class="chevron transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="faq-content h-0 overflow-hidden bg-slate-50 px-6 transition-all duration-300">
+                        <p class="py-6 text-slate-600">Students from Class 9 to early college and parents looking for clarity.</p>
+                    </div>
+                </div>
+                <div class="border border-slate-200 rounded-2xl overflow-hidden faq-item">
+                    <button class="w-full p-6 text-left flex justify-between items-center font-bold text-lg hover:bg-slate-50 transition">
+                        How long does it take?
+                        <span class="chevron transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="faq-content h-0 overflow-hidden bg-slate-50 px-6 transition-all duration-300">
+                        <p class="py-6 text-slate-600">The core discovery test takes about 15-20 minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-slate-900 text-white px-8 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h2 class="text-4xl md:text-6xl font-bold mb-8">Ready to see your <span class="text-amber-400">path glow?</span></h2>
+            <p class="text-xl text-slate-400 mb-12">Join thousands of students turning confusion into a concrete roadmap.</p>
+            <button class="bg-[#0f766e] text-white px-12 py-5 rounded-2xl font-bold text-xl hover:scale-105 transition breathing shadow-2xl shadow-teal-500/20">Start Your Winspire Test</button>
+        </div>
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <svg width="100%" height="100%" viewBox="0 0 400 400" preserveAspectRatio="none">
+                <path d="M0 200C0 200 100 100 200 200C300 300 400 200 400 200" stroke="#0f766e" stroke-width="4" fill="none" class="hero-svg-path" style="stroke-dashoffset: 0;"/>
+            </svg>
         </div>
     </section>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hero Path Animation
-        const path = document.querySelector('#path');
+        // Hero Animation
+        const path = document.querySelector('#hero-path');
         const length = path.getTotalLength();
         gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+        gsap.to(path, { strokeDashoffset: 0, duration: 2, ease: \"power2.out\", delay: 0.5 });
+        
+        gsap.from(\"#hero-text > *\", { y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: \"power3.out\" });
 
-        gsap.to(path, {
-            strokeDashoffset: 0,
-            duration: 2,
-            ease: "power2.out",
-            delay: 0.5
+        // Problem Section Animations
+        gsap.from(\"#problem-cards > div\", {
+            scrollTrigger: { trigger: \"#problem-cards\", start: \"top 80%\" },
+            y: 100, opacity: 0, duration: 0.8, stagger: 0.2, ease: \"back.out(1.7)\"
         });
 
-        // Glow ball movement
-        gsap.to("#glow-ball", {
-            duration: 2,
-            repeat: -1,
-            repeatDelay: 2,
-            ease: "none",
-            motionPath: {
-                path: "#path",
-                align: "#path",
-                alignOrigin: [0.5, 0.5]
-            }
-        });
+        const swapText = document.querySelector('#text-swap');
+        setInterval(() => {
+            gsap.to(swapText, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
+                swapText.innerText = swapText.innerText === \"Stable Jobs\" ? \"Dynamic Careers\" : \"Stable Jobs\";
+                gsap.fromTo(swapText, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+            }});
+        }, 3000);
 
-        // Hero Text reveal
-        gsap.from("#hero-text > *", {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out"
-        });
-
-        // Problem Cards Scroll Entrance
-        gsap.from("#problem-cards > div", {
+        // Solution Flow
+        gsap.to(\"#progress-line\", {
             scrollTrigger: {
-                trigger: "#problem-cards",
-                start: "top 80%",
+                trigger: \".space-y-20\",
+                start: \"top 60%\",
+                end: \"bottom 40%\",
+                scrub: true
             },
-            y: 100,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "back.out(1.7)"
+            height: \"100%\"
+        });
+
+        gsap.utils.toArray(\".step-item\").forEach(step => {
+            gsap.to(step, {
+                scrollTrigger: {
+                    trigger: step,
+                    start: \"top 80%\",
+                    toggleActions: \"play none none reverse\"
+                },
+                opacity: 1, y: -20, duration: 0.8, scale: 1.05
+            });
+        });
+
+        // Pillar Sequential Reveal
+        gsap.from(\"#pillar-cards > div\", {
+            scrollTrigger: { trigger: \"#pillar-cards\", start: \"top 85%\" },
+            x: -50, opacity: 0, duration: 0.6, stagger: 0.15, ease: \"power2.out\"
+        });
+
+        // Demo Interactivity
+        const range = document.querySelector('#demo-range');
+        const rangeVal = document.querySelector('#range-val');
+        range.addEventListener('input', (e) => rangeVal.innerText = e.target.value + '%');
+
+        const card = document.querySelector('#swipe-card');
+        let isDragging = false;
+        let startX;
+        card.addEventListener('mousedown', (e) => { isDragging = true; startX = e.clientX; });
+        document.addEventListener('mousemove', (e) => {
+            if(!isDragging) return;
+            const diff = e.clientX - startX;
+            gsap.to(card, { x: diff, rotation: diff * 0.1, duration: 0.1 });
+        });
+        document.addEventListener('mouseup', () => {
+            if(!isDragging) return;
+            isDragging = false;
+            gsap.to(card, { x: 0, rotation: 0, duration: 0.5, ease: \"elastic.out(1, 0.5)\" });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const btn = item.querySelector('button');
+            const content = item.querySelector('.faq-content');
+            const chevron = item.querySelector('.chevron');
+            btn.addEventListener('click', () => {
+                const isOpen = content.style.height === 'auto';
+                document.querySelectorAll('.faq-content').forEach(c => c.style.height = '0');
+                document.querySelectorAll('.chevron').forEach(ch => ch.style.transform = 'rotate(0)');
+                if(!isOpen) {
+                    content.style.height = 'auto';
+                    chevron.style.transform = 'rotate(180deg)';
+                }
+            });
         });
     </script>
 </body>
